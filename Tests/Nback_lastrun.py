@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
-This experiment was created using PsychoPy2 Experiment Builder (v1.85.0rc1),
-    on January 06, 2019, at 20:11
+This experiment was created using PsychoPy2 Experiment Builder (v1.90.3),
+    on 2019_01_07_1917
 If you publish work using this script please cite the PsychoPy publications:
     Peirce, JW (2007) PsychoPy - Psychophysics software in Python.
         Journal of Neuroscience Methods, 162(1-2), 8-13.
@@ -26,7 +26,7 @@ _thisDir = os.path.dirname(os.path.abspath(__file__)).decode(sys.getfilesystemen
 os.chdir(_thisDir)
 
 # Store info about the experiment session
-expName = u'Nback'  # from the Builder filename that created this script
+expName = 'Nback'  # from the Builder filename that created this script
 expInfo = {u'session': u'01', u'participant': u''}
 dlg = gui.DlgFromDict(dictionary=expInfo, title=expName)
 if dlg.OK == False:
@@ -40,7 +40,7 @@ filename = _thisDir + os.sep + u'data' + os.sep + '%s_%s' % (expInfo['participan
 # An ExperimentHandler isn't essential but helps with data saving
 thisExp = data.ExperimentHandler(name=expName, version='',
     extraInfo=expInfo, runtimeInfo=None,
-    originPath=u'H:\\GitHub\\Precision_tES_tACS_tRNS_tDCS\\Tests\\Nback.psyexp',
+    originPath=u'C:\\Users\\Tip\\Documents\\GitHub\\Precision_tES_tACS_tRNS_tDCS\\Tests\\Nback.psyexp',
     savePickle=True, saveWideText=True,
     dataFileName=filename)
 # save a log file for detail verbose info
@@ -67,21 +67,43 @@ else:
 
 # Initialize components for Routine "instruct"
 instructClock = core.Clock()
+import numpy as np
+import random
+m=10
+mass=[]
+corrans=[]
+k=0
+
+for i in range(m):
+   mass.append(random.randint(0,10)) 
+   #print(mass[i])
+for i in range(m):
+   corrans.append(random.randint(0,10)) 
+   #print(corrans[i])
+
+for i in range(8):
+    k=k+1
+    if (mass[i]==mass[k+1]):
+        corrans[i]=1
+    else:
+        corrans[i]=0
+    #print(mass[i],mass[k+1],corrans[i])
 instrText = visual.TextStim(win=win, name='instrText',
-    text=u'Press "Down" for correct answer',
-    font=u'Arial',
+    text='Press "Down" for correct answer',
+    font='Arial',
     pos=[0, 0], height=0.1, wrapWidth=None, ori=0, 
     color=[1, 1, 1], colorSpace='rgb', opacity=1,
-    depth=0.0);
+    depth=-1.0);
 
 # Initialize components for Routine "trial"
 trialClock = core.Clock()
+
 word = visual.TextStim(win=win, name='word',
-    text='default text',
+    text=None,
     font=u'Arial',
     pos=[0, 0], height=2, wrapWidth=None, ori=0, 
     color=1.0, colorSpace='rgb', opacity=1,
-    depth=0.0);
+    depth=-1.0);
 
 # Initialize components for Routine "thanks"
 thanksClock = core.Clock()
@@ -102,6 +124,7 @@ instructClock.reset()  # clock
 frameN = -1
 continueRoutine = True
 # update component parameters for each repeat
+
 ready = event.BuilderKeyResponse()
 # keep track of which components have finished
 instructComponents = [instrText, ready]
@@ -115,6 +138,7 @@ while continueRoutine:
     t = instructClock.getTime()
     frameN = frameN + 1  # number of completed frames (so 0 is the first frame)
     # update/draw components on each frame
+    
     
     # *instrText* updates
     if t >= 0 and instrText.status == NOT_STARTED:
@@ -162,27 +186,24 @@ while continueRoutine:
 for thisComponent in instructComponents:
     if hasattr(thisComponent, "setAutoDraw"):
         thisComponent.setAutoDraw(False)
+
 # the Routine "instruct" was not non-slip safe, so reset the non-slip timer
 routineTimer.reset()
 
-# set up handler to look after randomisation of conditions etc
-trials = data.TrialHandler(nReps=1.0, method='sequential', 
-    extraInfo=expInfo, originPath=-1,
-    trialList=data.importConditions(u'Nback.xlsx'),
-    seed=None, name='trials')
+# --------Prepare to start Staircase "trials" --------
+# set up handler to look after next chosen value etc
+trials = data.StairHandler(startVal=1, extraInfo=expInfo,
+    stepSizes=[0.8,0.8,0.4,0.4,0.2], stepType='lin',
+    nReversals=0, nTrials=10, 
+    nUp=1, nDown=3,
+    minVal=1, maxVal=10,
+    originPath=-1, name='trials')
 thisExp.addLoop(trials)  # add the loop to the experiment
-thisTrial = trials.trialList[0]  # so we can initialise stimuli with some values
-# abbreviate parameter names if possible (e.g. rgb = thisTrial.rgb)
-if thisTrial != None:
-    for paramName in thisTrial:
-        exec('{} = thisTrial[paramName]'.format(paramName))
+level = thisTrial = 1  # initialise some vals
 
 for thisTrial in trials:
     currentLoop = trials
-    # abbreviate parameter names if possible (e.g. rgb = thisTrial.rgb)
-    if thisTrial != None:
-        for paramName in thisTrial:
-            exec('{} = thisTrial[paramName]'.format(paramName))
+    level = thisTrial
     
     # ------Prepare to start Routine "trial"-------
     t = 0
@@ -191,8 +212,8 @@ for thisTrial in trials:
     continueRoutine = True
     routineTimer.add(3.000000)
     # update component parameters for each repeat
+    
     word.setColor([-1.000,-1.000,1.000], colorSpace='rgb')
-    word.setText(str(text))
     resp = event.BuilderKeyResponse()
     # keep track of which components have finished
     trialComponents = [word, resp]
@@ -207,6 +228,7 @@ for thisTrial in trials:
         frameN = frameN + 1  # number of completed frames (so 0 is the first frame)
         # update/draw components on each frame
         
+        
         # *word* updates
         if t >= 0 and word.status == NOT_STARTED:
             # keep track of start time/frame for later
@@ -216,6 +238,8 @@ for thisTrial in trials:
         frameRemains = 0 + 2.5- win.monitorFramePeriod * 0.75  # most of one frame period left
         if word.status == STARTED and t >= frameRemains:
             word.setAutoDraw(False)
+        if word.status == STARTED:  # only update if drawing
+            word.setText(u'', log=False)
         
         # *resp* updates
         if t >= 0 and resp.status == NOT_STARTED:
@@ -230,7 +254,7 @@ for thisTrial in trials:
         if resp.status == STARTED and t >= frameRemains:
             resp.status = STOPPED
         if resp.status == STARTED:
-            theseKeys = event.getKeys(keyList=['left', 'down', 'right'])
+            theseKeys = event.getKeys(keyList=['1', '0'])
             
             # check for quit:
             if "escape" in theseKeys:
@@ -239,7 +263,7 @@ for thisTrial in trials:
                 resp.keys = theseKeys[-1]  # just the last key pressed
                 resp.rt = resp.clock.getTime()
                 # was this 'correct'?
-                if (resp.keys == str(corrAns)) or (resp.keys == corrAns):
+                if (resp.keys == str(corrans)) or (resp.keys == corrans):
                     resp.corr = 1
                 else:
                     resp.corr = 0
@@ -267,32 +291,23 @@ for thisTrial in trials:
     for thisComponent in trialComponents:
         if hasattr(thisComponent, "setAutoDraw"):
             thisComponent.setAutoDraw(False)
+    
     # check responses
     if resp.keys in ['', [], None]:  # No response was made
         resp.keys=None
         # was no response the correct answer?!
-        if str(corrAns).lower() == 'none':
+        if str(corrans).lower() == 'none':
            resp.corr = 1  # correct non-response
         else:
            resp.corr = 0  # failed to respond (incorrectly)
-    # store data for trials (TrialHandler)
-    trials.addData('resp.keys',resp.keys)
-    trials.addData('resp.corr', resp.corr)
-    if resp.keys != None:  # we had a response
-        trials.addData('resp.rt', resp.rt)
+    # store data for trials (StairHandler)
+    trials.addResponse(resp.corr)
+    trials.addOtherData('resp.rt', resp.rt)
     thisExp.nextEntry()
     
-# completed 1.0 repeats of 'trials'
+# staircase completed
 
-# get names of stimulus parameters
-if trials.trialList in ([], [None], None):
-    params = []
-else:
-    params = trials.trialList[0].keys()
-# save data for this loop
-trials.saveAsExcel(filename + '.xlsx', sheetName='trials',
-    stimOut=params,
-    dataOut=['n','all_mean','all_std', 'all_raw'])
+trials.saveAsExcel(filename + '.xlsx', sheetName='trials')
 
 # ------Prepare to start Routine "thanks"-------
 t = 0
@@ -345,6 +360,8 @@ while continueRoutine and routineTimer.getTime() > 0:
 for thisComponent in thanksComponents:
     if hasattr(thisComponent, "setAutoDraw"):
         thisComponent.setAutoDraw(False)
+
+
 # these shouldn't be strictly necessary (should auto-save)
 thisExp.saveAsWideText(filename+'.csv')
 thisExp.saveAsPickle(filename)
