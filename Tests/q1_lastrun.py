@@ -40,7 +40,7 @@ filename = _thisDir + os.sep + u'data/%s_%s_%s' %(expInfo['participant'], expNam
 # An ExperimentHandler isn't essential but helps with data saving
 thisExp = data.ExperimentHandler(name=expName, version='',
     extraInfo=expInfo, runtimeInfo=None,
-    originPath=u'H:\\GitHub\\Precision_tES_tACS_tRNS_tDCS\\Tests\\q.psyexp',
+    originPath=u'H:\\GitHub\\Precision_tES_tACS_tRNS_tDCS\\Tests\\q1.psyexp',
     savePickle=True, saveWideText=True,
     dataFileName=filename)
 # save a log file for detail verbose info
@@ -243,7 +243,7 @@ routineTimer.reset()
 # set up handler to look after randomisation of conditions etc
 trials = data.TrialHandler(nReps=1, method='random', 
     extraInfo=expInfo, originPath=-1,
-    trialList=data.importConditions('word.xlsx'),
+    trialList=data.importConditions('q1.xlsx'),
     seed=None, name='trials')
 thisExp.addLoop(trials)  # add the loop to the experiment
 thisTrial = trials.trialList[0]  # so we can initialise stimuli with some values
@@ -267,7 +267,7 @@ for thisTrial in trials:
     # update component parameters for each repeat
     keyboard = event.BuilderKeyResponse()
     textEntryStim.text = u""
-    text_3.setText(q)
+    text_3.setText(text)
     # keep track of which components have finished
     trialComponents = [keyboard, ISI, text_3, textEntryStim]
     for thisComponent in trialComponents:

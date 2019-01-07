@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
-This experiment was created using PsychoPy2 Experiment Builder (v1.85.1),
-    on January 06, 2019, at 12:46
+This experiment was created using PsychoPy2 Experiment Builder (v1.85.0rc1),
+    on January 06, 2019, at 20:11
 If you publish work using this script please cite the PsychoPy publications:
     Peirce, JW (2007) PsychoPy - Psychophysics software in Python.
         Journal of Neuroscience Methods, 162(1-2), 8-13.
@@ -26,8 +26,8 @@ _thisDir = os.path.dirname(os.path.abspath(__file__)).decode(sys.getfilesystemen
 os.chdir(_thisDir)
 
 # Store info about the experiment session
-expName = 'q'  # from the Builder filename that created this script
-expInfo = {'session': '001', 'participant': ''}
+expName = u'Nback'  # from the Builder filename that created this script
+expInfo = {u'session': u'01', u'participant': u''}
 dlg = gui.DlgFromDict(dictionary=expInfo, title=expName)
 if dlg.OK == False:
     core.quit()  # user pressed cancel
@@ -35,16 +35,16 @@ expInfo['date'] = data.getDateStr()  # add a simple timestamp
 expInfo['expName'] = expName
 
 # Data file name stem = absolute path + name; later add .psyexp, .csv, .log, etc
-filename = _thisDir + os.sep + u'data/%s_%s_%s' %(expInfo['participant'], expName, expInfo['date'])
+filename = _thisDir + os.sep + u'data' + os.sep + '%s_%s' % (expInfo['participant'], expInfo['date'])
 
 # An ExperimentHandler isn't essential but helps with data saving
 thisExp = data.ExperimentHandler(name=expName, version='',
     extraInfo=expInfo, runtimeInfo=None,
-    originPath=u'H:\\GitHub\\Precision_tES_tACS_tRNS_tDCS\\Tests\\q.psyexp',
+    originPath=u'H:\\GitHub\\Precision_tES_tACS_tRNS_tDCS\\Tests\\Nback.psyexp',
     savePickle=True, saveWideText=True,
     dataFileName=filename)
 # save a log file for detail verbose info
-logFile = logging.LogFile(filename+'.log', level=logging.EXP)
+logFile = logging.LogFile(filename+'.log', level=logging.WARNING)
 logging.console.setLevel(logging.WARNING)  # this outputs to the screen, not a file
 
 endExpNow = False  # flag for 'escape' or other condition => quit the exp
@@ -53,10 +53,11 @@ endExpNow = False  # flag for 'escape' or other condition => quit the exp
 
 # Setup the Window
 win = visual.Window(
-    size=[1024, 768], fullscr=True, screen=0,
+    size=[2560, 1440], fullscr=True, screen=0,
     allowGUI=False, allowStencil=False,
-    monitor='testMonitor', color=[0,0,0], colorSpace='rgb',
-    blendMode='avg', useFBO=True)
+    monitor='testMonitor', color='black', colorSpace='rgb',
+    blendMode='avg', useFBO=True,
+    units='norm')
 # store frame rate of monitor if we can measure it
 expInfo['frameRate'] = win.getActualFrameRate()
 if expInfo['frameRate'] != None:
@@ -64,141 +65,66 @@ if expInfo['frameRate'] != None:
 else:
     frameDur = 1.0 / 60.0  # could not measure, so guess
 
-# Initialize components for Routine "ins"
-insClock = core.Clock()
-## Choose desired keymap
-import string
-
-# Set up the desired key names
-
-# entryChars holds the keynames that we will accept from 
-# the keyboard.
-# Here we're making a list of all lower case letters 
-# on an English-US keyboard.
-entryChars = [x for x in string.ascii_letters]
-# could put extra keynames here if desired, use
-# keynameFinder demo to get name of keys
-extraChars = []
-# The exception map is for when the keyname is
-# not what you want to display. i.e. the keyname
-exceptionMap = {"space": u" ",
-            u"q": u"й",
-            u"w": u"ц",
-            u"e": u"у",
-            u"r": u"к",
-            u"t": u"е",
-            u"y": u"н",
-            u"u": u"г",
-            u"i": u"ш",
-            u"o": u"щ",
-            u"p": u"з",
-            u"[": u"х",
-            u"]": u"ъ",
-            u"a": u"ф",
-            u"s": u"ы",
-            u"d": u"в",
-            u"f": u"а",
-            u"g": u"п",
-            u"h": u"р",
-            u"j": u"о",
-            u"k": u"л",
-            u"l": u"д",
-            u";": u"ж",
-            u"'": u"э",
-            u"z": u"я",
-            u"x": u"ч",
-            u"c": u"с",
-            u"v": u"м",
-            u"b": u"и",
-            u"n": u"т",
-            u"m": u"ь",
-            u",": u"б",
-            u".": u"ю",
-            u"/": u".",
-}
-
-# add extra characters into expected
-# key list
-for exChar in extraChars:
-    if not exChar in entryChars:
-        entryChars.append(exChar)
-
-# same with exception keys
-for exKey in exceptionMap.keys():
-    if not exKey in entryChars:
-        entryChars.append(exKey)
-
-enterKeys = ['return', 'num_enter']
-backspaceKeys = ['backspace']
-escapeKey = 'escape'
-instText = visual.TextStim(win=win, name='instText',
-    text='OK. Ready for the real thing?\n\n(Esc will quit)\n\nPress any key to continue',
-    font='Arial',
+# Initialize components for Routine "instruct"
+instructClock = core.Clock()
+instrText = visual.TextStim(win=win, name='instrText',
+    text=u'Press "Down" for correct answer',
+    font=u'Arial',
     pos=[0, 0], height=0.1, wrapWidth=None, ori=0, 
-    color='white', colorSpace='rgb', opacity=1,
-    depth=-1.0);
+    color=[1, 1, 1], colorSpace='rgb', opacity=1,
+    depth=0.0);
 
 # Initialize components for Routine "trial"
 trialClock = core.Clock()
-
-ISI = clock.StaticPeriod(win=win, screenHz=expInfo['frameRate'], name='ISI')
-text_3 = visual.TextStim(win=win, name='text_3',
+word = visual.TextStim(win=win, name='word',
     text='default text',
-    font='Arial',
-    pos=[-0.2, 0], height=0.2, wrapWidth=None, ori=0, 
-    color=[-1.000,-1.000,-1.000], colorSpace='rgb', opacity=1,
-    depth=-3.0);
-textEntryStim = visual.TextStim(win=win, name='textEntryStim',
-    text=None,
-    font='Arial',
-    pos=(0.3, 0), height=0.2, wrapWidth=None, ori=0, 
-    color=[-1.000,-1.000,-1.000], colorSpace='rgb', opacity=1,
-    depth=-4.0);
+    font=u'Arial',
+    pos=[0, 0], height=2, wrapWidth=None, ori=0, 
+    color=1.0, colorSpace='rgb', opacity=1,
+    depth=0.0);
 
-# Initialize components for Routine "resp"
-respClock = core.Clock()
+# Initialize components for Routine "thanks"
+thanksClock = core.Clock()
 thanksText = visual.TextStim(win=win, name='thanksText',
     text='This is the end of the experiment.\n\nThanks!',
-    font='Arial',
+    font='arial',
     pos=[0, 0], height=0.1, wrapWidth=None, ori=0, 
-    color='white', colorSpace='rgb', opacity=1,
+    color=[1, 1, 1], colorSpace='rgb', opacity=1,
     depth=0.0);
 
 # Create some handy timers
 globalClock = core.Clock()  # to track the time since experiment started
 routineTimer = core.CountdownTimer()  # to track time remaining of each (non-slip) routine 
 
-# ------Prepare to start Routine "ins"-------
+# ------Prepare to start Routine "instruct"-------
 t = 0
-insClock.reset()  # clock
+instructClock.reset()  # clock
 frameN = -1
 continueRoutine = True
 # update component parameters for each repeat
-
 ready = event.BuilderKeyResponse()
 # keep track of which components have finished
-insComponents = [instText, ready]
-for thisComponent in insComponents:
+instructComponents = [instrText, ready]
+for thisComponent in instructComponents:
     if hasattr(thisComponent, 'status'):
         thisComponent.status = NOT_STARTED
 
-# -------Start Routine "ins"-------
+# -------Start Routine "instruct"-------
 while continueRoutine:
     # get current time
-    t = insClock.getTime()
+    t = instructClock.getTime()
     frameN = frameN + 1  # number of completed frames (so 0 is the first frame)
     # update/draw components on each frame
     
-    
-    # *instText* updates
-    if t >= 0.0 and instText.status == NOT_STARTED:
+    # *instrText* updates
+    if t >= 0 and instrText.status == NOT_STARTED:
         # keep track of start time/frame for later
-        instText.tStart = t
-        instText.frameNStart = frameN  # exact frame index
-        instText.setAutoDraw(True)
+        instrText.tStart = t
+        instrText.frameNStart = frameN  # exact frame index
+        instrText.setAutoDraw(True)
     
     # *ready* updates
-    if t >= 0.0 and ready.status == NOT_STARTED:
+    if t >= 0 and ready.status == NOT_STARTED:
         # keep track of start time/frame for later
         ready.tStart = t
         ready.frameNStart = frameN  # exact frame index
@@ -219,7 +145,7 @@ while continueRoutine:
     if not continueRoutine:  # a component has requested a forced-end of Routine
         break
     continueRoutine = False  # will revert to True if at least one component still running
-    for thisComponent in insComponents:
+    for thisComponent in instructComponents:
         if hasattr(thisComponent, "status") and thisComponent.status != FINISHED:
             continueRoutine = True
             break  # at least one component has not yet finished
@@ -232,18 +158,17 @@ while continueRoutine:
     if continueRoutine:  # don't flip if this routine is over or we'll get a blank screen
         win.flip()
 
-# -------Ending Routine "ins"-------
-for thisComponent in insComponents:
+# -------Ending Routine "instruct"-------
+for thisComponent in instructComponents:
     if hasattr(thisComponent, "setAutoDraw"):
         thisComponent.setAutoDraw(False)
-
-# the Routine "ins" was not non-slip safe, so reset the non-slip timer
+# the Routine "instruct" was not non-slip safe, so reset the non-slip timer
 routineTimer.reset()
 
 # set up handler to look after randomisation of conditions etc
-trials = data.TrialHandler(nReps=1, method='random', 
+trials = data.TrialHandler(nReps=1.0, method='sequential', 
     extraInfo=expInfo, originPath=-1,
-    trialList=data.importConditions('word.xlsx'),
+    trialList=data.importConditions(u'Nback.xlsx'),
     seed=None, name='trials')
 thisExp.addLoop(trials)  # add the loop to the experiment
 thisTrial = trials.trialList[0]  # so we can initialise stimuli with some values
@@ -264,77 +189,62 @@ for thisTrial in trials:
     trialClock.reset()  # clock
     frameN = -1
     continueRoutine = True
+    routineTimer.add(3.000000)
     # update component parameters for each repeat
-    keyboard = event.BuilderKeyResponse()
-    textEntryStim.text = u""
-    text_3.setText(q)
+    word.setColor([-1.000,-1.000,1.000], colorSpace='rgb')
+    word.setText(str(text))
+    resp = event.BuilderKeyResponse()
     # keep track of which components have finished
-    trialComponents = [keyboard, ISI, text_3, textEntryStim]
+    trialComponents = [word, resp]
     for thisComponent in trialComponents:
         if hasattr(thisComponent, 'status'):
             thisComponent.status = NOT_STARTED
     
     # -------Start Routine "trial"-------
-    while continueRoutine:
+    while continueRoutine and routineTimer.getTime() > 0:
         # get current time
         t = trialClock.getTime()
         frameN = frameN + 1  # number of completed frames (so 0 is the first frame)
         # update/draw components on each frame
         
-        # *keyboard* updates
-        if t >= 0.0 and keyboard.status == NOT_STARTED:
+        # *word* updates
+        if t >= 0 and word.status == NOT_STARTED:
             # keep track of start time/frame for later
-            keyboard.tStart = t
-            keyboard.frameNStart = frameN  # exact frame index
-            keyboard.status = STARTED
+            word.tStart = t
+            word.frameNStart = frameN  # exact frame index
+            word.setAutoDraw(True)
+        frameRemains = 0 + 2.5- win.monitorFramePeriod * 0.75  # most of one frame period left
+        if word.status == STARTED and t >= frameRemains:
+            word.setAutoDraw(False)
+        
+        # *resp* updates
+        if t >= 0 and resp.status == NOT_STARTED:
+            # keep track of start time/frame for later
+            resp.tStart = t
+            resp.frameNStart = frameN  # exact frame index
+            resp.status = STARTED
             # keyboard checking is just starting
-            win.callOnFlip(keyboard.clock.reset)  # t=0 on next screen flip
+            win.callOnFlip(resp.clock.reset)  # t=0 on next screen flip
             event.clearEvents(eventType='keyboard')
-        if keyboard.status == STARTED:
-            theseKeys = event.getKeys()
+        frameRemains = 0 + 3- win.monitorFramePeriod * 0.75  # most of one frame period left
+        if resp.status == STARTED and t >= frameRemains:
+            resp.status = STOPPED
+        if resp.status == STARTED:
+            theseKeys = event.getKeys(keyList=['left', 'down', 'right'])
             
             # check for quit:
             if "escape" in theseKeys:
                 endExpNow = True
             if len(theseKeys) > 0:  # at least one key was pressed
-                keyboard.keys.extend(theseKeys)  # storing all keys
-                keyboard.rt.append(keyboard.clock.getTime())
-        if len(keyboard.keys) > 0: #make sure not empty, prevent list index error
-            currentText = textEntryStim.text
-            key = keyboard.keys.pop(-1) # get the last key entered
-        
-            if key in backspaceKeys: #allow backspacing
-                # set the text to the current text, except the last character
-                textEntryStim.text = currentText[:-1]
-            elif key in enterKeys: #allows return or other keys to end routine
+                resp.keys = theseKeys[-1]  # just the last key pressed
+                resp.rt = resp.clock.getTime()
+                # was this 'correct'?
+                if (resp.keys == str(corrAns)) or (resp.keys == corrAns):
+                    resp.corr = 1
+                else:
+                    resp.corr = 0
+                # a response ends the routine
                 continueRoutine = False
-            else:
-                if key in entryChars:
-                    if key in exceptionMap:
-                        key = exceptionMap[key]
-                    textEntryStim.text = currentText + key
-        
-        # *text_3* updates
-        if t >= 0.0 and text_3.status == NOT_STARTED:
-            # keep track of start time/frame for later
-            text_3.tStart = t
-            text_3.frameNStart = frameN  # exact frame index
-            text_3.setAutoDraw(True)
-        
-        # *textEntryStim* updates
-        if t >= 0.0 and textEntryStim.status == NOT_STARTED:
-            # keep track of start time/frame for later
-            textEntryStim.tStart = t
-            textEntryStim.frameNStart = frameN  # exact frame index
-            textEntryStim.setAutoDraw(True)
-        # *ISI* period
-        if t >= 0.0 and ISI.status == NOT_STARTED:
-            # keep track of start time/frame for later
-            ISI.tStart = t
-            ISI.frameNStart = frameN  # exact frame index
-            ISI.start(1)
-        elif ISI.status == STARTED:  # one frame should pass before updating params and completing
-            ISI.complete()  # finish the static period
         
         # check if all components have finished
         if not continueRoutine:  # a component has requested a forced-end of Routine
@@ -358,36 +268,49 @@ for thisTrial in trials:
         if hasattr(thisComponent, "setAutoDraw"):
             thisComponent.setAutoDraw(False)
     # check responses
-    if keyboard.keys in ['', [], None]:  # No response was made
-        keyboard.keys=None
-    trials.addData('keyboard.keys',keyboard.keys)
-    if keyboard.keys != None:  # we had a response
-        trials.addData('keyboard.rt', keyboard.rt)
-    trials.addData("responseText", textEntryStim.text)
-    # the Routine "trial" was not non-slip safe, so reset the non-slip timer
-    routineTimer.reset()
+    if resp.keys in ['', [], None]:  # No response was made
+        resp.keys=None
+        # was no response the correct answer?!
+        if str(corrAns).lower() == 'none':
+           resp.corr = 1  # correct non-response
+        else:
+           resp.corr = 0  # failed to respond (incorrectly)
+    # store data for trials (TrialHandler)
+    trials.addData('resp.keys',resp.keys)
+    trials.addData('resp.corr', resp.corr)
+    if resp.keys != None:  # we had a response
+        trials.addData('resp.rt', resp.rt)
     thisExp.nextEntry()
     
-# completed 1 repeats of 'trials'
+# completed 1.0 repeats of 'trials'
 
+# get names of stimulus parameters
+if trials.trialList in ([], [None], None):
+    params = []
+else:
+    params = trials.trialList[0].keys()
+# save data for this loop
+trials.saveAsExcel(filename + '.xlsx', sheetName='trials',
+    stimOut=params,
+    dataOut=['n','all_mean','all_std', 'all_raw'])
 
-# ------Prepare to start Routine "resp"-------
+# ------Prepare to start Routine "thanks"-------
 t = 0
-respClock.reset()  # clock
+thanksClock.reset()  # clock
 frameN = -1
 continueRoutine = True
 routineTimer.add(2.000000)
 # update component parameters for each repeat
 # keep track of which components have finished
-respComponents = [thanksText]
-for thisComponent in respComponents:
+thanksComponents = [thanksText]
+for thisComponent in thanksComponents:
     if hasattr(thisComponent, 'status'):
         thisComponent.status = NOT_STARTED
 
-# -------Start Routine "resp"-------
+# -------Start Routine "thanks"-------
 while continueRoutine and routineTimer.getTime() > 0:
     # get current time
-    t = respClock.getTime()
+    t = thanksClock.getTime()
     frameN = frameN + 1  # number of completed frames (so 0 is the first frame)
     # update/draw components on each frame
     
@@ -405,7 +328,7 @@ while continueRoutine and routineTimer.getTime() > 0:
     if not continueRoutine:  # a component has requested a forced-end of Routine
         break
     continueRoutine = False  # will revert to True if at least one component still running
-    for thisComponent in respComponents:
+    for thisComponent in thanksComponents:
         if hasattr(thisComponent, "status") and thisComponent.status != FINISHED:
             continueRoutine = True
             break  # at least one component has not yet finished
@@ -418,12 +341,10 @@ while continueRoutine and routineTimer.getTime() > 0:
     if continueRoutine:  # don't flip if this routine is over or we'll get a blank screen
         win.flip()
 
-# -------Ending Routine "resp"-------
-for thisComponent in respComponents:
+# -------Ending Routine "thanks"-------
+for thisComponent in thanksComponents:
     if hasattr(thisComponent, "setAutoDraw"):
         thisComponent.setAutoDraw(False)
-
-
 # these shouldn't be strictly necessary (should auto-save)
 thisExp.saveAsWideText(filename+'.csv')
 thisExp.saveAsPickle(filename)

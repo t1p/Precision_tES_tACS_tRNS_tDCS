@@ -1,8 +1,8 @@
-#!/usr/bin/env python2
+#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
-This experiment was created using PsychoPy2 Experiment Builder (v1.85.1),
-    on 2018_10_04_1902
+This experiment was created using PsychoPy2 Experiment Builder (v1.90.3),
+    on January 06, 2019, at 12:46
 If you publish work using this script please cite the PsychoPy publications:
     Peirce, JW (2007) PsychoPy - Psychophysics software in Python.
         Journal of Neuroscience Methods, 162(1-2), 8-13.
@@ -11,7 +11,7 @@ If you publish work using this script please cite the PsychoPy publications:
 """
 
 from __future__ import absolute_import, division
-from psychopy import locale_setup, gui, visual, core, data, event, logging, sound
+from psychopy import locale_setup, sound, gui, visual, core, data, event, logging, clock
 from psychopy.constants import (NOT_STARTED, STARTED, PLAYING, PAUSED,
                                 STOPPED, FINISHED, PRESSED, RELEASED, FOREVER)
 import numpy as np  # whole numpy lib is available, prepend 'np.'
@@ -27,7 +27,7 @@ os.chdir(_thisDir)
 
 # Store info about the experiment session
 expName = '40pair'  # from the Builder filename that created this script
-expInfo = {'participant':'', 'session':'001'}
+expInfo = {u'session': u'001', u'participant': u''}
 dlg = gui.DlgFromDict(dictionary=expInfo, title=expName)
 if dlg.OK == False:
     core.quit()  # user pressed cancel
@@ -53,7 +53,7 @@ endExpNow = False  # flag for 'escape' or other condition => quit the exp
 
 # Setup the Window
 win = visual.Window(
-    size=(1920, 1080), fullscr=True, screen=0,
+    size=[1920, 1080], fullscr=True, screen=0,
     allowGUI=False, allowStencil=False,
     monitor='testMonitor', color=[0,0,0], colorSpace='rgb',
     blendMode='avg', useFBO=True)
@@ -75,7 +75,7 @@ instText = visual.TextStim(win=win, name='instText',
 
 # Initialize components for Routine "trial"
 trialClock = core.Clock()
-ISI = core.StaticPeriod(win=win, screenHz=expInfo['frameRate'], name='ISI')
+ISI = clock.StaticPeriod(win=win, screenHz=expInfo['frameRate'], name='ISI')
 word = visual.TextStim(win=win, name='word',
     text='default text',
     font='Arial',
@@ -168,38 +168,38 @@ routineTimer.reset()
 # set up handler to look after randomisation of conditions etc
 trials = data.TrialHandler(nReps=1, method='sequential', 
     extraInfo=expInfo, originPath=-1,
-    trialList=data.importConditions(u'word1.xlsx'),
+    trialList=data.importConditions('2nback.xlsx'),
     seed=None, name='trials')
 thisExp.addLoop(trials)  # add the loop to the experiment
 thisTrial = trials.trialList[0]  # so we can initialise stimuli with some values
 # abbreviate parameter names if possible (e.g. rgb = thisTrial.rgb)
 if thisTrial != None:
-    for paramName in thisTrial.keys():
-        exec(paramName + '= thisTrial.' + paramName)
+    for paramName in thisTrial:
+        exec('{} = thisTrial[paramName]'.format(paramName))
 
 for thisTrial in trials:
     currentLoop = trials
     # abbreviate parameter names if possible (e.g. rgb = thisTrial.rgb)
     if thisTrial != None:
-        for paramName in thisTrial.keys():
-            exec(paramName + '= thisTrial.' + paramName)
+        for paramName in thisTrial:
+            exec('{} = thisTrial[paramName]'.format(paramName))
     
     # ------Prepare to start Routine "trial"-------
     t = 0
     trialClock.reset()  # clock
     frameN = -1
     continueRoutine = True
-    routineTimer.add(4.000000)
     # update component parameters for each repeat
     word.setText(text)
+    key_resp_2 = event.BuilderKeyResponse()
     # keep track of which components have finished
-    trialComponents = [ISI, word]
+    trialComponents = [ISI, word, key_resp_2]
     for thisComponent in trialComponents:
         if hasattr(thisComponent, 'status'):
             thisComponent.status = NOT_STARTED
     
     # -------Start Routine "trial"-------
-    while continueRoutine and routineTimer.getTime() > 0:
+    while continueRoutine:
         # get current time
         t = trialClock.getTime()
         frameN = frameN + 1  # number of completed frames (so 0 is the first frame)
@@ -214,6 +214,27 @@ for thisTrial in trials:
         frameRemains = 0.0 + 4- win.monitorFramePeriod * 0.75  # most of one frame period left
         if word.status == STARTED and t >= frameRemains:
             word.setAutoDraw(False)
+        
+        # *key_resp_2* updates
+        if t >= 0.0 and key_resp_2.status == NOT_STARTED:
+            # keep track of start time/frame for later
+            key_resp_2.tStart = t
+            key_resp_2.frameNStart = frameN  # exact frame index
+            key_resp_2.status = STARTED
+            # keyboard checking is just starting
+            win.callOnFlip(key_resp_2.clock.reset)  # t=0 on next screen flip
+            event.clearEvents(eventType='keyboard')
+        if key_resp_2.status == STARTED:
+            theseKeys = event.getKeys(keyList=['y', 'n', 'left', 'right', 'space'])
+            
+            # check for quit:
+            if "escape" in theseKeys:
+                endExpNow = True
+            if len(theseKeys) > 0:  # at least one key was pressed
+                key_resp_2.keys = theseKeys[-1]  # just the last key pressed
+                key_resp_2.rt = key_resp_2.clock.getTime()
+                # a response ends the routine
+                continueRoutine = False
         # *ISI* period
         if t >= 0.0 and ISI.status == NOT_STARTED:
             # keep track of start time/frame for later
@@ -244,6 +265,14 @@ for thisTrial in trials:
     for thisComponent in trialComponents:
         if hasattr(thisComponent, "setAutoDraw"):
             thisComponent.setAutoDraw(False)
+    # check responses
+    if key_resp_2.keys in ['', [], None]:  # No response was made
+        key_resp_2.keys=None
+    trials.addData('key_resp_2.keys',key_resp_2.keys)
+    if key_resp_2.keys != None:  # we had a response
+        trials.addData('key_resp_2.rt', key_resp_2.rt)
+    # the Routine "trial" was not non-slip safe, so reset the non-slip timer
+    routineTimer.reset()
     thisExp.nextEntry()
     
 # completed 1 repeats of 'trials'

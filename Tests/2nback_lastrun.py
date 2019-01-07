@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
-This experiment was created using PsychoPy2 Experiment Builder (v1.85.1),
-    on January 06, 2019, at 12:46
+This experiment was created using PsychoPy2 Experiment Builder (v1.90.3),
+    on January 06, 2019, at 16:31
 If you publish work using this script please cite the PsychoPy publications:
     Peirce, JW (2007) PsychoPy - Psychophysics software in Python.
         Journal of Neuroscience Methods, 162(1-2), 8-13.
@@ -40,7 +40,7 @@ filename = _thisDir + os.sep + u'data/%s_%s_%s' %(expInfo['participant'], expNam
 # An ExperimentHandler isn't essential but helps with data saving
 thisExp = data.ExperimentHandler(name=expName, version='',
     extraInfo=expInfo, runtimeInfo=None,
-    originPath=u'H:\\GitHub\\Precision_tES_tACS_tRNS_tDCS\\Tests\\q.psyexp',
+    originPath=u'H:\\GitHub\\Precision_tES_tACS_tRNS_tDCS\\Tests\\2nback.psyexp',
     savePickle=True, saveWideText=True,
     dataFileName=filename)
 # save a log file for detail verbose info
@@ -81,6 +81,7 @@ entryChars = [x for x in string.ascii_letters]
 extraChars = []
 # The exception map is for when the keyname is
 # not what you want to display. i.e. the keyname
+#вставить вырезанные исключения
 exceptionMap = {"space": u" ",
             u"q": u"й",
             u"w": u"ц",
@@ -116,13 +117,13 @@ exceptionMap = {"space": u" ",
             u".": u"ю",
             u"/": u".",
 }
-
 # add extra characters into expected
 # key list
 for exChar in extraChars:
     if not exChar in entryChars:
         entryChars.append(exChar)
 
+#вставить 2 вырезанные исключения
 # same with exception keys
 for exKey in exceptionMap.keys():
     if not exKey in entryChars:
@@ -144,13 +145,13 @@ trialClock = core.Clock()
 ISI = clock.StaticPeriod(win=win, screenHz=expInfo['frameRate'], name='ISI')
 text_3 = visual.TextStim(win=win, name='text_3',
     text='default text',
-    font='Arial',
+    font=u'Arial',
     pos=[-0.2, 0], height=0.2, wrapWidth=None, ori=0, 
-    color=[-1.000,-1.000,-1.000], colorSpace='rgb', opacity=1,
+    color=[-2.000,-1.000,-1.000], colorSpace='rgb', opacity=1,
     depth=-3.0);
 textEntryStim = visual.TextStim(win=win, name='textEntryStim',
     text=None,
-    font='Arial',
+    font=u'Arial',
     pos=(0.3, 0), height=0.2, wrapWidth=None, ori=0, 
     color=[-1.000,-1.000,-1.000], colorSpace='rgb', opacity=1,
     depth=-4.0);
@@ -241,9 +242,9 @@ for thisComponent in insComponents:
 routineTimer.reset()
 
 # set up handler to look after randomisation of conditions etc
-trials = data.TrialHandler(nReps=1, method='random', 
+trials = data.TrialHandler(nReps=1, method='sequential', 
     extraInfo=expInfo, originPath=-1,
-    trialList=data.importConditions('word.xlsx'),
+    trialList=data.importConditions('2nback.xlsx'),
     seed=None, name='trials')
 thisExp.addLoop(trials)  # add the loop to the experiment
 thisTrial = trials.trialList[0]  # so we can initialise stimuli with some values
@@ -267,7 +268,7 @@ for thisTrial in trials:
     # update component parameters for each repeat
     keyboard = event.BuilderKeyResponse()
     textEntryStim.text = u""
-    text_3.setText(q)
+    text_3.setText(str(text))
     # keep track of which components have finished
     trialComponents = [keyboard, ISI, text_3, textEntryStim]
     for thisComponent in trialComponents:
@@ -327,12 +328,15 @@ for thisTrial in trials:
             textEntryStim.tStart = t
             textEntryStim.frameNStart = frameN  # exact frame index
             textEntryStim.setAutoDraw(True)
+        frameRemains = 0.0 + 3- win.monitorFramePeriod * 0.75  # most of one frame period left
+        if textEntryStim.status == STARTED and t >= frameRemains:
+            textEntryStim.setAutoDraw(False)
         # *ISI* period
         if t >= 0.0 and ISI.status == NOT_STARTED:
             # keep track of start time/frame for later
             ISI.tStart = t
             ISI.frameNStart = frameN  # exact frame index
-            ISI.start(1)
+            ISI.start(3)
         elif ISI.status == STARTED:  # one frame should pass before updating params and completing
             ISI.complete()  # finish the static period
         
@@ -364,6 +368,7 @@ for thisTrial in trials:
     if keyboard.keys != None:  # we had a response
         trials.addData('keyboard.rt', keyboard.rt)
     trials.addData("responseText", textEntryStim.text)
+    #trials.addData("mouse", mouse.name)
     # the Routine "trial" was not non-slip safe, so reset the non-slip timer
     routineTimer.reset()
     thisExp.nextEntry()

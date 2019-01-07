@@ -1,8 +1,8 @@
-#!/usr/bin/env python2
+#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
 This experiment was created using PsychoPy2 Experiment Builder (v1.85.1),
-    on 2018_10_04_1901
+    on January 06, 2019, at 12:45
 If you publish work using this script please cite the PsychoPy publications:
     Peirce, JW (2007) PsychoPy - Psychophysics software in Python.
         Journal of Neuroscience Methods, 162(1-2), 8-13.
@@ -11,7 +11,7 @@ If you publish work using this script please cite the PsychoPy publications:
 """
 
 from __future__ import absolute_import, division
-from psychopy import locale_setup, gui, visual, core, data, event, logging, sound
+from psychopy import locale_setup, sound, gui, visual, core, data, event, logging, clock
 from psychopy.constants import (NOT_STARTED, STARTED, PLAYING, PAUSED,
                                 STOPPED, FINISHED, PRESSED, RELEASED, FOREVER)
 import numpy as np  # whole numpy lib is available, prepend 'np.'
@@ -27,7 +27,7 @@ os.chdir(_thisDir)
 
 # Store info about the experiment session
 expName = 'q'  # from the Builder filename that created this script
-expInfo = {'participant':'', 'session':'001'}
+expInfo = {'session': '001', 'participant': ''}
 dlg = gui.DlgFromDict(dictionary=expInfo, title=expName)
 if dlg.OK == False:
     core.quit()  # user pressed cancel
@@ -53,7 +53,7 @@ endExpNow = False  # flag for 'escape' or other condition => quit the exp
 
 # Setup the Window
 win = visual.Window(
-    size=(1920, 1080), fullscr=True, screen=0,
+    size=[1024, 768], fullscr=True, screen=0,
     allowGUI=False, allowStencil=False,
     monitor='testMonitor', color=[0,0,0], colorSpace='rgb',
     blendMode='avg', useFBO=True)
@@ -141,7 +141,7 @@ instText = visual.TextStim(win=win, name='instText',
 # Initialize components for Routine "trial"
 trialClock = core.Clock()
 
-ISI = core.StaticPeriod(win=win, screenHz=expInfo['frameRate'], name='ISI')
+ISI = clock.StaticPeriod(win=win, screenHz=expInfo['frameRate'], name='ISI')
 text_3 = visual.TextStim(win=win, name='text_3',
     text='default text',
     font='Arial',
@@ -252,21 +252,21 @@ routineTimer.reset()
 # set up handler to look after randomisation of conditions etc
 trials = data.TrialHandler(nReps=1, method='random', 
     extraInfo=expInfo, originPath=-1,
-    trialList=data.importConditions(u'word1.xlsx'),
+    trialList=data.importConditions('word.xlsx'),
     seed=None, name='trials')
 thisExp.addLoop(trials)  # add the loop to the experiment
 thisTrial = trials.trialList[0]  # so we can initialise stimuli with some values
 # abbreviate parameter names if possible (e.g. rgb = thisTrial.rgb)
 if thisTrial != None:
-    for paramName in thisTrial.keys():
-        exec(paramName + '= thisTrial.' + paramName)
+    for paramName in thisTrial:
+        exec('{} = thisTrial[paramName]'.format(paramName))
 
 for thisTrial in trials:
     currentLoop = trials
     # abbreviate parameter names if possible (e.g. rgb = thisTrial.rgb)
     if thisTrial != None:
-        for paramName in thisTrial.keys():
-            exec(paramName + '= thisTrial.' + paramName)
+        for paramName in thisTrial:
+            exec('{} = thisTrial[paramName]'.format(paramName))
     
     # ------Prepare to start Routine "trial"-------
     t = 0
