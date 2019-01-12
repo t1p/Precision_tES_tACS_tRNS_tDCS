@@ -34,15 +34,15 @@
         <Param name="opacity" updates="constant" val="1" valType="code"/>
         <Param name="colorSpace" updates="constant" val="rgb" valType="str"/>
         <Param name="name" updates="constant" val="word" valType="code"/>
-        <Param name="color" updates="set every repeat" val="$[-1.000,-1.000,1.000]" valType="str"/>
         <Param name="wrapWidth" updates="constant" val="" valType="code"/>
+        <Param name="color" updates="set every repeat" val="$[-1.000,-1.000,1.000]" valType="str"/>
+        <Param name="text" updates="set every repeat" val="str($text)" valType="str"/>
         <Param name="stopVal" updates="constant" val="2.5" valType="code"/>
         <Param name="durationEstim" updates="None" val="" valType="code"/>
         <Param name="pos" updates="constant" val="[0, 0]" valType="code"/>
         <Param name="flip" updates="constant" val="" valType="str"/>
         <Param name="startEstim" updates="None" val="" valType="code"/>
         <Param name="units" updates="None" val="from exp settings" valType="str"/>
-        <Param name="text" updates="set every repeat" val="str($text)" valType="str"/>
         <Param name="startType" updates="None" val="time (s)" valType="str"/>
         <Param name="ori" updates="constant" val="0" valType="code"/>
         <Param name="stopType" updates="None" val="duration (s)" valType="str"/>
@@ -56,11 +56,11 @@
         <Param name="name" updates="None" val="resp" valType="code"/>
         <Param name="stopVal" updates="constant" val="3" valType="code"/>
         <Param name="durationEstim" updates="None" val="" valType="code"/>
-        <Param name="forceEndRoutine" updates="constant" val="True" valType="bool"/>
+        <Param name="forceEndRoutine" updates="constant" val="False" valType="bool"/>
         <Param name="startEstim" updates="None" val="" valType="code"/>
         <Param name="discard previous" updates="constant" val="True" valType="bool"/>
         <Param name="startType" updates="None" val="time (s)" valType="str"/>
-        <Param name="allowedKeys" updates="constant" val="&quot;left&quot;,&quot;down&quot;,&quot;right&quot;" valType="code"/>
+        <Param name="allowedKeys" updates="constant" val="&quot;None&quot;,&quot;down&quot;,&quot;right&quot;" valType="code"/>
         <Param name="stopType" updates="None" val="duration (s)" valType="str"/>
         <Param name="startVal" updates="None" val="0" valType="code"/>
         <Param name="store" updates="constant" val="last key" valType="str"/>
@@ -72,15 +72,15 @@
         <Param name="opacity" updates="constant" val="1" valType="code"/>
         <Param name="colorSpace" updates="constant" val="rgb" valType="str"/>
         <Param name="name" updates="constant" val="instrText" valType="code"/>
-        <Param name="color" updates="constant" val="$[1, 1, 1]" valType="str"/>
         <Param name="wrapWidth" updates="constant" val="" valType="code"/>
+        <Param name="color" updates="constant" val="$[1, 1, 1]" valType="str"/>
+        <Param name="text" updates="constant" val="Press &quot;Down&quot; for correct answer" valType="str"/>
         <Param name="stopVal" updates="constant" val="" valType="code"/>
         <Param name="durationEstim" updates="None" val="" valType="code"/>
         <Param name="pos" updates="constant" val="[0, 0]" valType="code"/>
         <Param name="flip" updates="constant" val="" valType="str"/>
         <Param name="startEstim" updates="None" val="" valType="code"/>
         <Param name="units" updates="None" val="from exp settings" valType="str"/>
-        <Param name="text" updates="constant" val="Press &quot;Down&quot; for correct answer" valType="str"/>
         <Param name="startType" updates="None" val="time (s)" valType="str"/>
         <Param name="ori" updates="constant" val="0" valType="code"/>
         <Param name="stopType" updates="None" val="duration (s)" valType="str"/>
@@ -110,15 +110,15 @@
         <Param name="opacity" updates="constant" val="1" valType="code"/>
         <Param name="colorSpace" updates="constant" val="rgb" valType="str"/>
         <Param name="name" updates="constant" val="thanksText" valType="code"/>
-        <Param name="color" updates="constant" val="$[1, 1, 1]" valType="str"/>
         <Param name="wrapWidth" updates="constant" val="" valType="code"/>
+        <Param name="color" updates="constant" val="$[1, 1, 1]" valType="str"/>
+        <Param name="text" updates="constant" val="This is the end of the experiment. Thanks!" valType="str"/>
         <Param name="stopVal" updates="constant" val="2.0" valType="code"/>
         <Param name="durationEstim" updates="None" val="" valType="code"/>
         <Param name="pos" updates="constant" val="[0, 0]" valType="code"/>
         <Param name="flip" updates="constant" val="" valType="str"/>
         <Param name="startEstim" updates="None" val="" valType="code"/>
         <Param name="units" updates="None" val="from exp settings" valType="str"/>
-        <Param name="text" updates="constant" val="This is the end of the experiment.&amp;#10;&amp;#10;Thanks!" valType="str"/>
         <Param name="startType" updates="None" val="time (s)" valType="str"/>
         <Param name="ori" updates="constant" val="0" valType="code"/>
         <Param name="stopType" updates="None" val="duration (s)" valType="str"/>
@@ -131,14 +131,14 @@
   <Flow>
     <Routine name="instruct"/>
     <LoopInitiator loopType="TrialHandler" name="trials">
-      <Param name="conditionsFile" updates="None" val="Nback.xlsx" valType="str"/>
+      <Param name="conditionsFile" updates="None" val="2Nb-stimuls-30.xlsx" valType="str"/>
       <Param name="name" updates="None" val="trials" valType="code"/>
       <Param name="isTrials" updates="None" val="True" valType="bool"/>
       <Param name="random seed" updates="None" val="" valType="code"/>
       <Param name="loopType" updates="None" val="sequential" valType="str"/>
       <Param name="nReps" updates="None" val="1" valType="num"/>
       <Param name="endPoints" updates="None" val="[1, 2]" valType="num"/>
-      <Param name="conditions" updates="None" val="[OrderedDict([('text', 7), ('corrAns', None)]), OrderedDict([('text', 9), ('corrAns', None)]), OrderedDict([('text', 9), ('corrAns', None)]), OrderedDict([('text', 9), ('corrAns', u'down')]), OrderedDict([('text', 6), ('corrAns', None)]), OrderedDict([('text', 9), ('corrAns', u'down')]), OrderedDict([('text', 8), ('corrAns', None)]), OrderedDict([('text', 8), ('corrAns', None)]), OrderedDict([('text', 6), ('corrAns', None)]), OrderedDict([('text', 2), ('corrAns', None)]), OrderedDict([('text', 5), ('corrAns', None)]), OrderedDict([('text', 4), ('corrAns', None)]), OrderedDict([('text', 8), ('corrAns', None)]), OrderedDict([('text', 8), ('corrAns', None)]), OrderedDict([('text', 8), ('corrAns', u'down')]), OrderedDict([('text', 7), ('corrAns', None)]), OrderedDict([('text', 6), ('corrAns', None)]), OrderedDict([('text', 7), ('corrAns', u'down')]), OrderedDict([('text', 2), ('corrAns', None)]), OrderedDict([('text', 5), ('corrAns', None)]), OrderedDict([('text', 8), ('corrAns', None)]), OrderedDict([('text', 5), ('corrAns', u'down')]), OrderedDict([('text', 2), ('corrAns', None)]), OrderedDict([('text', 9), ('corrAns', None)]), OrderedDict([('text', 4), ('corrAns', None)]), OrderedDict([('text', 4), ('corrAns', None)]), OrderedDict([('text', 7), ('corrAns', None)]), OrderedDict([('text', 3), ('corrAns', None)]), OrderedDict([('text', 8), ('corrAns', None)]), OrderedDict([('text', 1), ('corrAns', None)])]" valType="str"/>
+      <Param name="conditions" updates="None" val="[OrderedDict([('text', 7), ('corrAns', u'None')]), OrderedDict([('text', 9), ('corrAns', u'None')]), OrderedDict([('text', 9), ('corrAns', u'None')]), OrderedDict([('text', 9), ('corrAns', u'down')]), OrderedDict([('text', 6), ('corrAns', u'None')]), OrderedDict([('text', 9), ('corrAns', u'down')]), OrderedDict([('text', 8), ('corrAns', u'None')]), OrderedDict([('text', 8), ('corrAns', u'None')]), OrderedDict([('text', 6), ('corrAns', u'None')]), OrderedDict([('text', 8), ('corrAns', u'down')]), OrderedDict([('text', 2), ('corrAns', u'None')]), OrderedDict([('text', 9), ('corrAns', u'None')]), OrderedDict([('text', 1), ('corrAns', u'None')]), OrderedDict([('text', 4), ('corrAns', u'None')]), OrderedDict([('text', 9), ('corrAns', u'None')]), OrderedDict([('text', 4), ('corrAns', u'down')]), OrderedDict([('text', 4), ('corrAns', u'None')]), OrderedDict([('text', 1), ('corrAns', u'None')]), OrderedDict([('text', 2), ('corrAns', u'None')]), OrderedDict([('text', 1), ('corrAns', u'down')]), OrderedDict([('text', 6), ('corrAns', u'None')]), OrderedDict([('text', 5), ('corrAns', u'None')]), OrderedDict([('text', 9), ('corrAns', u'None')]), OrderedDict([('text', 7), ('corrAns', u'None')]), OrderedDict([('text', 4), ('corrAns', u'None')]), OrderedDict([('text', 1), ('corrAns', u'None')]), OrderedDict([('text', 9), ('corrAns', u'None')]), OrderedDict([('text', 1), ('corrAns', u'down')]), OrderedDict([('text', 8), ('corrAns', u'None')]), OrderedDict([('text', 8), ('corrAns', u'None')])]" valType="str"/>
       <Param name="Selected rows" updates="None" val="" valType="str"/>
     </LoopInitiator>
     <Routine name="trial"/>

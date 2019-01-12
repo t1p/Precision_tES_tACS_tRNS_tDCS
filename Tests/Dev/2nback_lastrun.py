@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """
 This experiment was created using PsychoPy2 Experiment Builder (v1.90.3),
-    on January 06, 2019, at 16:31
+    on 2019_01_12_1158
 If you publish work using this script please cite the PsychoPy publications:
     Peirce, JW (2007) PsychoPy - Psychophysics software in Python.
         Journal of Neuroscience Methods, 162(1-2), 8-13.
@@ -145,13 +145,13 @@ trialClock = core.Clock()
 ISI = clock.StaticPeriod(win=win, screenHz=expInfo['frameRate'], name='ISI')
 text_3 = visual.TextStim(win=win, name='text_3',
     text='default text',
-    font=u'Arial',
+    font='Arial',
     pos=[-0.2, 0], height=0.2, wrapWidth=None, ori=0, 
     color=[-2.000,-1.000,-1.000], colorSpace='rgb', opacity=1,
     depth=-3.0);
 textEntryStim = visual.TextStim(win=win, name='textEntryStim',
     text=None,
-    font=u'Arial',
+    font='Arial',
     pos=(0.3, 0), height=0.2, wrapWidth=None, ori=0, 
     color=[-1.000,-1.000,-1.000], colorSpace='rgb', opacity=1,
     depth=-4.0);
